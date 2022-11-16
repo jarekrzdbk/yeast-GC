@@ -1,0 +1,10 @@
+#!/bin/bash
+
+input=$(</dev/stdin)
+while IFS= read -r line; do
+    cContent=$(echo $line | awk -FC '{print NF-1}')
+    gContent=$(echo $line | awk -FG '{print NF-1}')
+    gcContent=$(( cContent + gContent ))
+    totallength=${#line}
+    echo "scale=2 ; $gcContent / $totallength" | bc | awk '{printf "%0.2f\n", $0}'
+done <<< $input
