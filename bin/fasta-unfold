@@ -1,0 +1,39 @@
+#!/bin/bash
+
+lineNumber=0
+for var in "$@"
+do
+  #echo -e "\n"
+  while IFS="" read -r p || [ -n "$p" ]
+  do
+    lineNumber+=1
+    pattern=^\>[a-z\|A-Z\d.\s.\,]*
+    if [[ "$p" =~ $pattern ]]; then
+      if [[ "$lineNumber" -eq 1 ]]; then
+        echo "$p"
+      else
+        echo -e "\n$p"
+      fi
+    else
+        echo -n "$p"
+    fi
+  done < $var
+done
+[ ! -t 0 ] || exit 0
+lineNumber=0
+sed 's/>gi/\n&/g' /dev/stdin | sed '/^[[:space:]]*$/d' |
+
+  while IFS="" read -r p || [ -n "$p" ]
+  do
+    lineNumber+=1
+    pattern=^\>[a-z\|A-Z\d.\s.\,]*
+    if [[ "$p" =~ $pattern ]]; then
+      if [[ "$lineNumber" -eq 1 ]]; then
+        echo "$p"
+      else
+        echo -e "\n$p"
+      fi
+    else
+        echo -n "$p"
+    fi
+  done
