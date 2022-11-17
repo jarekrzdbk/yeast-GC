@@ -5,7 +5,7 @@ all: gccount
 gccount: ${GSCOUNT_FILES}
 outputs/%.gc: inputs/%.fsa
 	#!/bin/bash
-	bin/fasta-unfold < $< | sed '/^>/d' | bin/gc-content > $@
+	bin/fasta-unfold < $< | bin/find-orfs | bin/gc-content > $@
 
 clean: 
 	rm ${GSCOUNT_FILES}
