@@ -1,0 +1,11 @@
+#!/bin/bash
+
+input=$(</dev/stdin)
+
+     echo "$input" |
+       sed '/^>/d' | while read LINE
+         do
+            grep -oP 'ATG.*?T[GA]A' <<< "$LINE" | grep -vwE '\w{1,147}'
+            grep -oP 'ATG.*?TAG' <<< "$LINE" | grep -vwE '\w{1,147}'
+         done
+         
