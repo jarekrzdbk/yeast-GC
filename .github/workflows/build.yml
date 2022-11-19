@@ -17,7 +17,6 @@ jobs:
     
     - name: calculate-gc-count
       run: make
-      shell: bash
 
     - name: gc-count
       uses: actions/upload-artifact@v3
