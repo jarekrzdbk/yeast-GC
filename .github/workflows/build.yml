@@ -22,9 +22,3 @@ jobs:
       with:
         name: gc-content
         path: outputs/
-
-    - name: Run check
-      run: make check
-
-    - name: Run distcheck
-      run: make distcheck
