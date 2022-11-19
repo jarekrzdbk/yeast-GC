@@ -16,7 +16,8 @@ jobs:
     
     - name: calculate-gc-count
       run: make
-    - name: Archive code coverage results
+
+    - name: gc-count
       uses: actions/upload-artifact@v3
 
       with:
