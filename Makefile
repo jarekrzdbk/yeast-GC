@@ -5,30 +5,35 @@ AUX_FILES = $(TEX_FILES:%.tex=%.aux)
 OUT_FILES = $(TEX_FILES:%.tex=%.out)
 LOG_FILES = $(TEX_FILES:%.tex=%.log)
 PDF_FILES = $(TEX_FILES:%.tex=%.pdf)
+TOC_FILES = $(TEX_FILES:%.tex=%.toc)
+SNM_FILES = $(TEX_FILES:%.tex=%.snm)
+NAV_FILES = $(TEX_FILES:%.tex=%.nav)
+DVI_FILES = $(TEX_FILES:%.tex=%.dvi)
 
 all: gccount presentation.pdf
 gccount: ${GSCOUNT_FILES}
+
+generate-plots: gccount
+	Rscript bin/generate-plots.R
+
 outputs/%.gc: inputs/%.fsa
 	#!/bin/bash
 	bin/fasta-unfold < $< | bin/find-orfs-grep | bin/gc-content > $@
 
-%.dvi: %.tex
-	latex $<
-%.ps: %.dvi
-	dvips $<
-%.pdf: %.ps
-	ps2pdf $<
+# %.dvi: %.tex psfiles
+# 	latex $<
+# %.ps: %.dvi
+# 	dvips $<
+%.pdf: %.tex generate-plots
+	pdflatex $<
 
-%.ps: %.png
-	pngtopnm $< | pnmtops -noturn > $@
+#DEPENDENCY_FILES = ${TEX_FILES:%.tex=.%.d}
 
-DEPENDENCY_FILES = ${TEX_FILES:%.tex=.%.d}
+#include ${DEPENDENCY_FILES}
 
-include ${DEPENDENCY_FILES}
-
-.%.d: %.tex
-	mktexdepend $< > $@
+#.%.d: %.tex
+#	mktexdepend $< > $@
 
 clean: 
-	#rm -f ${GSCOUNT_FILES}
-	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES}
+	rm -f ${GSCOUNT_FILES} outputs/*.pdf
+	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES} ${TOC_FILES} ${SNM_FILES} ${NAV_FILES} ${DVI_FILES}
