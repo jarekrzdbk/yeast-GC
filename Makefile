@@ -10,7 +10,7 @@ SNM_FILES = $(TEX_FILES:%.tex=%.snm)
 NAV_FILES = $(TEX_FILES:%.tex=%.nav)
 DVI_FILES = $(TEX_FILES:%.tex=%.dvi)
 
-all: gccount presentation.pdf
+all: gccount presentation.pdf report.pdf
 gccount: ${GSCOUNT_FILES}
 
 generate-plots: gccount

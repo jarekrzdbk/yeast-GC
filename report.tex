@@ -1,0 +1,46 @@
+\documentclass{article}
+
+\usepackage[pdftex]{graphicx}
+
+\title{Analysis of gc count ratio i 3 strains of yeast}
+\author{Yaroslav Rozdobudko}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\input{text-parts/intro.tex}
+
+\section{Methods}
+
+First fasta files for unfolded using fasta-unfold script, then content of unfolded files was passed to find-orfs script,
+which looked for ORFs, then GC content ratio were calculated.
+generate-plot.R script generated plots from gc files
+
+\section{Plots}
+
+\begin{figure}
+    \includegraphics[scale=0.4]{outputs/cen_gc_frequency_ratio.pdf}
+    \includegraphics[scale=0.4]{outputs/fl_gc_frequency_ratio.pdf}
+    \includegraphics[scale=0.4]{outputs/ec_gc_frequency_ratio.pdf}
+    \caption{GC frequency ratio histograms}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[scale=0.8]{outputs/combined_histogram.pdf}
+    \caption{combined frequency ratio histograms}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[scale=0.8]{outputs/combined_boxplot.pdf}
+    \caption{combined frequency ratio boxplot}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[scale=0.8]{outputs/combined_densityplot.pdf}
+    \caption{combined frequency ratio densityplot}
+\end{figure}
+
+\end{document}
