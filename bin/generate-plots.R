@@ -1,6 +1,6 @@
 rm(list=ls())
-#install.packages("ggplot2")
-#install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("dplyr")
 library(ggplot2)
 library(dplyr)
 setwd("./outputs")
