@@ -1,0 +1,12 @@
+Package: generate-plots-GC
+Title: Generating GC ratio plots
+Version: 1.0.0.0
+Authors@R: person("Jaroslav", "Rozdobudko", email = "jarekrzdbk@gmail.com", role = c("aut", "cre"))
+Desciption: Generates plots
+Depends:
+    R (>= 3.4.2)
+License: GPL-3
+Encoding: UTF-8
+Imports: ggplot2, 
+    dplyr
+LazyData: true

@@ -1,8 +1,0 @@
-Package: generate-plots-GC
-Title: Generating GC ratio plots
-Version: 1.0.0.0
-Desciption: Generates plots
-Depends:
-    R (>= 3.4.2)
-Imports: ggplot2, 
-    dplyr
