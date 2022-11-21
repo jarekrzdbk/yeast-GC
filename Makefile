@@ -18,7 +18,7 @@ generate-plots: gccount
 
 outputs/%.gc: inputs/%.fsa
 	#!/bin/bash
-	bin/fasta-unfold < $< | bin/find-orfs-grep | bin/gc-content > $@
+	bin/fasta-unfold < $< | bin/find-orfs | bin/gc-content > $@
 
 # %.dvi: %.tex psfiles
 # 	latex $<

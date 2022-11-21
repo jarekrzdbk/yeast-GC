@@ -1,41 +1,14 @@
 #!/bin/bash
+
 input=$(</dev/stdin)
 
-       echo "$input" | sed '/^>/d' | while read LINE
+     echo "$input" |
+       sed '/^>/d' | while read LINE
          do
-            foo=$LINE
-            while [[ ${#foo} -gt 147 ]]; do
-              codon=$(echo ${foo:0:3})
-              tempFoo=$(echo ${foo:3})
-              if [ "$codon" == "ATG" ]; then
-                orf=""
-                orf="${codon}"
-                numberOfCodons=1
-                while [[ ${#codon} -eq 3 ]];
-                do
-                  codon=$(echo ${tempFoo:0:3})
-                  tempFoo=$(echo ${tempFoo:3})
-                  orf="${orf}${codon}"
-                  numberOfCodons=$((numberOfCodons+1))
-                  if [[ "$codon" == "TAA" || "$codon" == "TAG" || "$codon" == "TGA" ]]; then
-                    #echo "found stop coddon $codon"
-                    if [[ ${numberOfCodons} -ge 50 ]]; then
-                      echo "$orf"
-                      foo=$tempFoo
-                      #echo "greater then 50"
-                    else
-                      #echo "foo $foo"
-                      foo=$(echo ${foo:1})
-                      break
-                    fi
-                    break
-                  fi
-                done
-              else
-                #echo "did not find"
-                #echo "new foo $foo"
-                #echo "foo count ${#foo}"
-                foo=$(echo ${foo:1})
-              fi
-            done
+            #grep -Po '(ATG((...)*?)(TGA))|(ATG((...)*?)(TAA))|(ATG((...)*?)(TAG))' <<< "$LINE"
+            grep -Po '(ATG(...)*?T(A(A|G)|GA))' <<< "$LINE" | awk 'length >= 147'
+            #perl -pe 's|(.*?)(ATG.*?TGA)(.*?)|\2\n|g' <<< "$LINE" | head -n -1
+            #grep -oP 'ATG.*?(TGA|TA[AG])' <<< "$LINE" #| grep -vwE '\w{1,147}'
+            #grep -oP 'ATG.*?TAG' <<< "$LINE" | grep -vwE '\w{1,147}'
          done
+         
