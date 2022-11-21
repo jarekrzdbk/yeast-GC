@@ -23,7 +23,7 @@ jobs:
           Imports
 
     - name: Install pdflatex on Linux
-        run: sudo apt-get update -y && sudo apt-get install -y texlive-latex-base
+      run: sudo apt-get update -y && sudo apt-get install -y texlive-latex-base
 
     - uses: actions/checkout@v3
     
