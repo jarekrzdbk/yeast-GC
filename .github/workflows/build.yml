@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: calculate-gc-count
+    - name: calculate-gc-count-and-generate-presentation
       run: make
 
     - name: gc-count
@@ -23,3 +23,17 @@ jobs:
       with:
         name: gc-content
         path: outputs/
+    
+    - name: presentation
+      uses: actions/upload-artifact@v3
+
+      with:
+        name: presentation
+        path: presentation.pdf
+
+    - name: report
+      uses: actions/upload-artifact@v3
+
+      with:
+        name: report
+        path: report.pdf
