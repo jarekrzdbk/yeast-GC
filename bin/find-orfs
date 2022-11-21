@@ -5,10 +5,6 @@ input=$(</dev/stdin)
      echo "$input" |
        sed '/^>/d' | while read LINE
          do
-            #grep -Po '(ATG((...)*?)(TGA))|(ATG((...)*?)(TAA))|(ATG((...)*?)(TAG))' <<< "$LINE"
             grep -Po '(ATG(...)*?T(A(A|G)|GA))' <<< "$LINE" | awk 'length >= 147'
-            #perl -pe 's|(.*?)(ATG.*?TGA)(.*?)|\2\n|g' <<< "$LINE" | head -n -1
-            #grep -oP 'ATG.*?(TGA|TA[AG])' <<< "$LINE" #| grep -vwE '\w{1,147}'
-            #grep -oP 'ATG.*?TAG' <<< "$LINE" | grep -vwE '\w{1,147}'
          done
          
