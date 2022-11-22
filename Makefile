@@ -1,6 +1,6 @@
 FSA_FILES = $(wildcard inputs/*.fsa)
 PDF_RESOURCES_FILES = outputs/cen_gc_frequency_ratio.pdf outputs/ec_gc_frequency_ratio.pdf outputs/fl_gc_frequency_ratio.pdf outputs/combined_histogram.pdf outputs/combined_boxplot.pdf outputs/combined_densityplot.pdf
-GSCOUNT_FILES = ${FSA_FILES:inputs/%.fsa=outputs/%.gc}
+GCCOUNT_FILES = ${FSA_FILES:inputs/%.fsa=outputs/%.gc}
 TEX_FILES = $(wildcard *.tex)
 AUX_FILES = $(TEX_FILES:%.tex=%.aux)
 OUT_FILES = $(TEX_FILES:%.tex=%.out)
@@ -16,7 +16,7 @@ PDF_FILES = ${TEX_FILES:%.tex=%.pdf}
 
 all: ${PDF_FILES}
 
-${PDF_RESOURCES_FILES} &: ${GSCOUNT_FILES}
+${PDF_RESOURCES_FILES} &: ${GCCOUNT_FILES}
 	Rscript bin/generate-plots.R
 
 outputs/%.gc: inputs/%.fsa
@@ -40,5 +40,5 @@ outputs/%.gc: inputs/%.fsa
 .PHONY: clean
 
 clean: 
-	rm -f ${GSCOUNT_FILES} outputs/*.pdf
+	rm -f ${GCCOUNT_FILES} outputs/*.pdf
 	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES} ${TOC_FILES} ${SNM_FILES} ${NAV_FILES} ${DVI_FILES}
