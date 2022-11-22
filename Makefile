@@ -1,4 +1,5 @@
 FSA_FILES = $(wildcard inputs/*.fsa)
+PDF_RESOURCES_FILES = outputs/cen_gc_frequency_ratio.pdf outputs/ec_gc_frequency_ratio.pdf outputs/fl_gc_frequency_ratio.pdf outputs/combined_histogram.pdf outputs/combined_boxplot.pdf outputs/combined_densityplot.pdf
 GSCOUNT_FILES = ${FSA_FILES:inputs/%.fsa=outputs/%.gc}
 TEX_FILES = $(wildcard *.tex)
 AUX_FILES = $(TEX_FILES:%.tex=%.aux)
@@ -10,10 +11,9 @@ SNM_FILES = $(TEX_FILES:%.tex=%.snm)
 NAV_FILES = $(TEX_FILES:%.tex=%.nav)
 DVI_FILES = $(TEX_FILES:%.tex=%.dvi)
 
-all: gccount presentation.pdf report.pdf
-gccount: ${GSCOUNT_FILES}
+all: presentation.pdf report.pdf
 
-generate-plots: gccount
+${PDF_RESOURCES_FILES} &: ${GSCOUNT_FILES}
 	Rscript bin/generate-plots.R
 
 outputs/%.gc: inputs/%.fsa
@@ -24,7 +24,7 @@ outputs/%.gc: inputs/%.fsa
 # 	latex $<
 # %.ps: %.dvi
 # 	dvips $<
-%.pdf: %.tex generate-plots
+%.pdf: %.tex ${PDF_RESOURCES_FILES}
 	pdflatex $<
 
 #DEPENDENCY_FILES = ${TEX_FILES:%.tex=.%.d}
@@ -35,5 +35,5 @@ outputs/%.gc: inputs/%.fsa
 #	mktexdepend $< > $@
 
 clean: 
-	rm -f ${GSCOUNT_FILES} outputs/*.pdf
+	rm -f outputs/*.pdf
 	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES} ${TOC_FILES} ${SNM_FILES} ${NAV_FILES} ${DVI_FILES}
