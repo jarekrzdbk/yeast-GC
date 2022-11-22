@@ -10,8 +10,11 @@ TOC_FILES = $(TEX_FILES:%.tex=%.toc)
 SNM_FILES = $(TEX_FILES:%.tex=%.snm)
 NAV_FILES = $(TEX_FILES:%.tex=%.nav)
 DVI_FILES = $(TEX_FILES:%.tex=%.dvi)
+PDF_FILES = ${TEX_FILES:%.tex=%.pdf}
 
-all: presentation.pdf report.pdf
+.PHONY: all
+
+all: ${PDF_FILES}
 
 ${PDF_RESOURCES_FILES} &: ${GSCOUNT_FILES}
 	Rscript bin/generate-plots.R
@@ -34,6 +37,8 @@ outputs/%.gc: inputs/%.fsa
 #.%.d: %.tex
 #	mktexdepend $< > $@
 
+.PHONY: clean
+
 clean: 
-	rm -f outputs/*.pdf
+	rm -f ${GSCOUNT_FILES} outputs/*.pdf
 	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES} ${TOC_FILES} ${SNM_FILES} ${NAV_FILES} ${DVI_FILES}
