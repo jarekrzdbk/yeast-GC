@@ -23,19 +23,8 @@ outputs/%.gc: inputs/%.fsa
 	#!/bin/bash
 	bin/fasta-unfold < $< | bin/find-orfs | bin/gc-content > $@
 
-# %.dvi: %.tex psfiles
-# 	latex $<
-# %.ps: %.dvi
-# 	dvips $<
 %.pdf: %.tex ${PDF_RESOURCES_FILES}
 	pdflatex $<
-
-#DEPENDENCY_FILES = ${TEX_FILES:%.tex=.%.d}
-
-#include ${DEPENDENCY_FILES}
-
-#.%.d: %.tex
-#	mktexdepend $< > $@
 
 .PHONY: clean
 
