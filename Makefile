@@ -20,7 +20,6 @@ ${PDF_RESOURCES_FILES} &: ${GCCOUNT_FILES}
 	Rscript bin/generate-plots.R
 
 outputs/%.gc: inputs/%.fsa
-	#!/bin/bash
 	bin/fasta-unfold < $< | bin/find-orfs | bin/gc-content > $@
 
 %.pdf: %.tex ${PDF_RESOURCES_FILES}
