@@ -11,6 +11,8 @@ SNM_FILES = $(TEX_FILES:%.tex=%.snm)
 NAV_FILES = $(TEX_FILES:%.tex=%.nav)
 DVI_FILES = $(TEX_FILES:%.tex=%.dvi)
 PDF_FILES = ${TEX_FILES:%.tex=%.pdf}
+BBL_FILES = ${TEX_FILES:%.tex=%.bbl}
+BLG_FILES = ${TEX_FILES:%.tex=%.blg}
 
 .PHONY: all
 
@@ -24,9 +26,12 @@ outputs/%.gc: inputs/%.fsa
 
 %.pdf: %.tex ${PDF_RESOURCES_FILES}
 	pdflatex $<
+	bibtex $(basename $<).aux
+	pdflatex $<
+	pdflatex $<
 
 .PHONY: clean
 
 clean: 
 	rm -f ${GCCOUNT_FILES} outputs/*.pdf
-	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES} ${TOC_FILES} ${SNM_FILES} ${NAV_FILES} ${DVI_FILES}
+	rm -f ${AUX_FILES} ${OUT_FILES} ${PDF_FILES} ${LOG_FILES} ${TOC_FILES} ${SNM_FILES} ${NAV_FILES} ${DVI_FILES} ${BBL_FILES} ${BLG_FILES}

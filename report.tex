@@ -14,10 +14,12 @@
 \input{text-parts/intro.tex}
 
 \section{Methods}
-
+Yeast genome was subject of interest for some time ~\cite{DUJON1996263} ~\cite{Dujon2004} ~\cite{Dujon2017}
+In this repository solution was developed to calculate GC ratio in ORFs of 3 yeast strains.
 First fasta files for unfolded using fasta-unfold script, then content of unfolded files was passed to find-orfs script,
 which looked for ORFs, then GC content ratio were calculated.
 generate-plot.R script generated plots from gc files
+resulting plots look similar to plots presented in research done by Lynch ~\cite{Lynch2010} 
 
 \section{Plots}
 
@@ -42,5 +44,9 @@ generate-plot.R script generated plots from gc files
     \includegraphics[scale=0.8]{outputs/combined_densityplot.pdf}
     \caption{combined frequency ratio densityplot}
 \end{figure}
+
+\clearpage
+\bibliography{bibliography}
+\bibliographystyle{plain}
 
 \end{document}
