@@ -13,19 +13,16 @@ pdf("cen_gc_frequency_ratio.pdf")
 ggplot(cen_data, aes(x = gc)) +
   ggtitle("count of orfs in CEN cen by gc content") +
   geom_histogram(fill = "white", colour = "black", binwidth = 0.01)
-dev.off()
 
 pdf("fl_gc_frequency_ratio.pdf")
 ggplot(fl_data, aes(x = gc)) +
   ggtitle("count of orfs in FL100 by gc content") +
   geom_histogram(fill = "white", colour = "black", binwidth = 0.01)
-dev.off()
 
 pdf("ec_gc_frequency_ratio.pdf")
 ggplot(ec_data, aes(x = gc)) +
   ggtitle("count of orfs in EC9 by gc content") +
   geom_histogram(fill = "white", colour = "black", binwidth = 0.01)
-dev.off()
 
 combdat <- dplyr::bind_rows(list(cen=cen_data,fl=fl_data, ec=ec_data),
                             .id="strain")
@@ -34,7 +31,6 @@ ggplot(combdat,aes(gc,fill=strain)) +
   ggtitle("combined histogram of all 3 strains by gc frequency ratio") +
   scale_fill_manual(values=c("red","blue", "green")) +
   geom_histogram(alpha=0.35,binwidth=0.01,position="identity")
-dev.off()
 
 pdf("combined_boxplot.pdf")
 ggplot(combdat, aes(x=gc, y=strain, color=strain, fill=strain)) + 
@@ -43,7 +39,6 @@ ggplot(combdat, aes(x=gc, y=strain, color=strain, fill=strain)) +
   stat_summary(fun=mean, geom="point", shape=23, size=4) + 
   scale_fill_brewer(palette="Pastel2") + 
   theme_minimal()
-dev.off()
 
 pdf("combined_densityplot.pdf")
 ggplot(combdat, aes(gc, fill = strain)) +
