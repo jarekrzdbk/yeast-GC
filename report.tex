@@ -1,6 +1,8 @@
 \documentclass{article}
 
 \usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+
 
 \title{Analysis of gc count ratio in 3 strains of yeast}
 \author{Yaroslav Rozdobudko}
@@ -12,14 +14,19 @@
 \section{Introduction}
 
 \input{text-parts/intro.tex}
+Yeast strains were taken from \href{http://sgd-archive.yeastgenome.org/}{Saccharomyces Genome Database} ~\cite{Engel2013} 
 
 \section{Methods}
-Yeast genome was subject of interest for some time ~\cite{DUJON1996263} ~\cite{Dujon2004} ~\cite{Dujon2017}
-In this repository solution was developed to calculate GC ratio in ORFs of 3 yeast strains.
+Yeast genome was subject of interest for some time ~\cite{DUJON1996263} ~\cite{Dujon2004} ~\cite{Dujon2017} \\
+In this repository solution was developed to calculate GC ratio in ORFs of 3 yeast strains. \\
 First fasta files for unfolded using fasta-unfold script, then content of unfolded files was passed to find-orfs script,
 which looked for ORFs, then GC content ratio were calculated.
-generate-plot.R script generated plots from gc files
-resulting plots look similar to plots presented in research done by Lynch ~\cite{Lynch2010} 
+generate-plot.R script generated plots from gc files, ggplot2 library was used to draw plots.
+resulting plots look similar to plots presented in research done by Lynch ~\cite{Lynch2010}. \\
+All scripts are run automatically with make, and report and presentation pdfs are created. \\
+All code was uploaded to GitHub to the \href{https://github.com/jarekrzdbk/yeast-GC}{yeast-GC} repository, 
+GitHub Actions pipeline was added that installs dependencies on agent and run  make, gc and pdfs are uploaded as artifacts.
+
 
 \section{Plots}
 
